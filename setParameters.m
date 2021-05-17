@@ -20,7 +20,7 @@ function cfg = setParameters
     cfg.verbose = 1;
     cfg.skipSyncTests = 0;
 
-    cfg.audio.devIdx = 3; % 5 %11
+%     cfg.audio.devIdx = 3; % 5 %11
 
     %% Engine parameters
 
@@ -36,9 +36,9 @@ function cfg = setParameters
     % MRI settings
 
     cfg = setMRI(cfg);
-    cfg.suffix.acquisition = '0p75mmEv';
+%     cfg.suffix.acquisition = '0p75mmEv';
 
-    cfg.pacedByTriggers.do = false;
+    cfg.pacedByTriggers.do = true;
 
     %% Experiment Design
 
@@ -79,6 +79,8 @@ function cfg = setParameters
 
         cfg.timing.eventDuration = cfg.mri.repetitionTime / 2 - 0.04; % second
 
+        % Time between blocs in nb of triggers (remember to consider the nb trigger to wait + 1)
+        cfg.timing.triggerIBI = 4;
         % Time between blocs in secs
         cfg.timing.IBI = 0;
         % Time between events in secs
@@ -155,7 +157,7 @@ end
 function cfg = setMRI(cfg)
     % letter sent by the trigger to sync stimulation and volume acquisition
     cfg.mri.triggerKey = 't';
-    cfg.mri.triggerNb = 5;
+    cfg.mri.triggerNb = 0;
 
     cfg.mri.repetitionTime = 1.8;
 
